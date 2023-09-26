@@ -5,20 +5,19 @@
         label="Session length (min):"
         :value="sessionLength"
         @update-time="updateSessionTime"
-        :disabled="isInputDesableds"
+        :disabled="isInputDisabled"
       />
       <Input
         label="Break length (min):"
         :value="breakLength"
         @update-time="updateBreakTime"
-        :disabled="isInputDesableds"
+        :disabled="isInputDisabled"
       />
     </div>
 
     <Countdown :minutes="currentMinutes" :seconds="currentSeconds" />
 
     <Button v-if="!isRunning" :content="startButtonContent" @action="startCountdown" />
-
     <Button v-else content="Reset" @action="stopCountdown" />
   </div>
 </template>
@@ -41,7 +40,7 @@ const currentSeconds = ref(0)
 
 const isSession = ref(true)
 const isRunning = ref(false)
-const isInputDesableds = ref(false)
+const isInputDisabled = ref(false)
 
 // Methods
 function updateSessionTime(time) {
@@ -56,7 +55,7 @@ function updateBreakTime(time) {
 
 function startCountdown() {
   isRunning.value = true
-  isInputDesableds.value = true
+  isInputDisabled.value = true
 
   setIntervalId.value = setInterval(updateCountdown, 1000)
 }
@@ -67,7 +66,7 @@ function updateCountdown() {
     updateCountdownMode()
     
     isRunning.value = false
-    isInputDesableds.value = false
+    isInputDisabled.value = false
   } else if (currentSeconds.value === 0) {
     currentMinutes.value -= 1
     currentSeconds.value = 59
@@ -78,7 +77,7 @@ function updateCountdown() {
 
 function stopCountdown() {
   isRunning.value = false
-  isInputDesableds.value = false
+  isInputDisabled.value = false
 
   clearInterval(setIntervalId.value)
 

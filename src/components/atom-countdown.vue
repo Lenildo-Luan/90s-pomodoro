@@ -1,5 +1,5 @@
 <template>
-  <h1 class="atom-countdown">{{ formatedTime }}</h1>
+  <h1 class="atom-countdown">{{ formattedTime }}</h1>
 </template>
 
 <script setup>
@@ -10,11 +10,13 @@ const props = defineProps({
   seconds: Number
 })
 
-const formatedTime = computed(() => {
-  const formatedMinuts = props.minutes < 10 ? `0${props.minutes}` : `${props.minutes}`
-  const formatedSeconds = props.seconds < 10 ? `0${props.seconds}` : `${props.seconds}`
+const formattedTime = computed(() => {
+  const {minutes, seconds} = props  
 
-  return `${formatedMinuts}:${formatedSeconds}`
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`
+  const formattedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`
+
+  return `${formattedMinutes}:${formattedSeconds}`
 })
 </script>
 
